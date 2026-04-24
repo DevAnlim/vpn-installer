@@ -12,11 +12,11 @@ DOMAIN=${DOMAIN:-your-domain.com}
 read -p "📧 Email для SSL (example@example.com): " EMAIL
 EMAIL=${EMAIL:-example@example.com}
 
-read -p "🎭 Fake site (https://demo.cloudreve.org): " FAKE_SITE
+read -p "🎭 Фейковый сайт (https://demo.cloudreve.org): " FAKE_SITE
 FAKE_SITE=${FAKE_SITE:-https://demo.cloudreve.org}
 
-read -p "👤 Username (оставь пустым = авто): " USER_NAME
-read -p "🔑 Password (оставь пустым = авто): " USER_PASS
+read -p "👤 Логин (оставь пустым = авто): " USER_NAME
+read -p "🔑 Пароль (оставь пустым = авто): " USER_PASS
 
 read -p "⚡ Установить WARP? (y/n): " WARP_INPUT
 INSTALL_WARP=false
@@ -49,8 +49,9 @@ echo "[+] Установка xcaddy..."
 go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
 
 echo "[+] Подготовка TMP..."
-mkdir -p /root/tmp
+mkdir /root/tmp
 export TMPDIR=/root/tmp
+echo $TMPDIR
 
 echo "[+] Сборка Caddy..."
 ~/go/bin/xcaddy build --with github.com/caddyserver/forwardproxy@caddy2=github.com/klzgrad/forwardproxy@naive
@@ -69,7 +70,7 @@ echo "Логин: $USER_NAME"
 echo "Пароль: $USER_PASS"
 
 echo "[+] Создание конфигурации Caddy..."
-mkdir -p /etc/caddy
+mkdir /etc/caddy
 
 cat <<EOF > /etc/caddy/Caddyfile
 :443, $DOMAIN
@@ -135,10 +136,11 @@ if [ "$INSTALL_WARP" = true ]; then
   warp-cli registration new
   warp-cli mode proxy
   warp-cli connect
+  
 if [ "$INSTALL_WARP" = true ]; then
   echo "[!] Добавь в Caddyfile:"
-  echo "Добавьте строку upstream socks5://127.0.0.1:40000"
-  echo "nano /etc/caddy/Caddyfile"
+  echo "Добавьте строку "
+  echo "Путь /etc/caddy/Caddyfile"
   echo "В ваш Caddyfile внутрь блока forward_proxy и выполните systemctl restart caddy"
 fi
 
