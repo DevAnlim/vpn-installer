@@ -53,7 +53,7 @@ mkdir -p /root/tmp
 export TMPDIR=/root/tmp
 
 echo "[+] Сборка Caddy..."
-~/go/bin/xcaddy build --with github.com/caddyserver/forwardproxy=github.com/klzgrad/forwardproxy
+~/go/bin/xcaddy build --with github.com/caddyserver/forwardproxy@caddy2=github.com/klzgrad/forwardproxy@naive
 
 echo "[+] Генерация логина/пароля..."
 
