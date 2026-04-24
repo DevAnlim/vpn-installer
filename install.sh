@@ -137,7 +137,9 @@ if [ "$INSTALL_WARP" = true ]; then
   warp-cli connect
 if [ "$INSTALL_WARP" = true ]; then
   echo "[!] Добавь в Caddyfile:"
-  echo "upstream socks5://127.0.0.1:40000"
+  echo "Добавьте строку upstream socks5://127.0.0.1:40000"
+  echo "nano /etc/caddy/Caddyfile"
+  echo "В ваш Caddyfile внутрь блока forward_proxy и выполните systemctl restart caddy"
 fi
 
 echo ""
