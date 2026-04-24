@@ -135,7 +135,7 @@ if [ "$INSTALL_WARP" = true ]; then
   warp-cli registration new
   warp-cli mode proxy
   warp-cli connect
-
+if [ "$INSTALL_WARP" = true ]; then
   echo "[!] Добавь в Caddyfile:"
   echo "upstream socks5://127.0.0.1:40000"
 fi
